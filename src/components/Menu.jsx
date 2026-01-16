@@ -12,7 +12,7 @@ const Menu = () => {
             price: '£24',
             description: 'Handmade tagliatelle, black truffle shavings, parmesan cream.',
             category: 'Pasta',
-            image: '/menu-pasta.png'
+            image: `${import.meta.env.BASE_URL}menu-pasta.png`
         },
         {
             id: 2,
@@ -20,7 +20,7 @@ const Menu = () => {
             price: '£12',
             description: 'Artisanal coffee blend served with our house-made classic Tiramisu.',
             category: 'Coffee & Desserts',
-            image: '/menu-coffee.png'
+            image: `${import.meta.env.BASE_URL}menu-coffee.png`
         },
         {
             id: 3,
@@ -28,7 +28,7 @@ const Menu = () => {
             price: '£18',
             description: 'Pecorino Romano, black pepper, tonnarelli pasta.',
             category: 'Pasta',
-            image: '/menu-pasta.png' // Reusing for demo if needed, or placeholder
+            image: `${import.meta.env.BASE_URL}menu-pasta.png` // Reusing for demo if needed, or placeholder
         },
         {
             id: 4,

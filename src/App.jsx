@@ -35,9 +35,9 @@ function App() {
           borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.1)' : 'none'
         }}
       >
-        <div style={{ color: 'var(--color-text-primary)', fontSize: '1.5rem', fontFamily: 'var(--font-heading)', fontWeight: '700', letterSpacing: '1px' }}>
+        <a href={import.meta.env.BASE_URL} style={{ textDecoration: 'none', color: 'var(--color-text-primary)', fontSize: '1.5rem', fontFamily: 'var(--font-heading)', fontWeight: '700', letterSpacing: '1px' }}>
           ALFREDO'S <span style={{ color: 'var(--color-accent)' }}>1920</span>
-        </div>
+        </a>
 
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           {['Menu', 'About', 'Reservations', 'Contact'].map((item) => (
@@ -77,6 +77,17 @@ function App() {
               <FaPhone />
               <span>+44 7310 314451</span>
             </span>
+            <a
+              href="https://www.instagram.com/alfredos1920/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'inherit', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'inherit'}
+            >
+              <FaInstagram size={20} />
+              <span>@alfredos1920</span>
+            </a>
           </div>
 
           {/* Google Maps Embed */}
@@ -94,7 +105,7 @@ function App() {
         </div>
 
         <div style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
-          &copy; 2024 Alfredo's 1920 London. All rights reserved.
+          &copy; 2026 Alfredo's 1920 London. All rights reserved.
         </div>
       </footer>
     </div>
