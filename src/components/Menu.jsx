@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
     const [activeCategory, setActiveCategory] = useState('All');
@@ -72,7 +73,7 @@ const Menu = () => {
                 </div>
 
                 {/* Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+                <div className="menu-grid">
                     {filteredItems.map(item => (
                         <div
                             key={item.id}
@@ -110,26 +111,29 @@ const Menu = () => {
                 </div>
 
                 <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-                    <button
+                    <Link
+                        to="/menu"
                         style={{
+                            display: 'inline-block',
                             border: '1px solid var(--color-accent)',
                             padding: '1rem 3rem',
                             color: 'var(--color-accent)',
                             textTransform: 'uppercase',
                             letterSpacing: '1px',
-                            transition: 'all 0.3s ease'
+                            transition: 'all 0.3s ease',
+                            textDecoration: 'none'
                         }}
                         onMouseOver={(e) => {
-                            e.target.style.backgroundColor = 'var(--color-accent)';
-                            e.target.style.color = 'var(--color-bg-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--color-accent)';
+                            e.currentTarget.style.color = 'var(--color-bg-primary)';
                         }}
                         onMouseOut={(e) => {
-                            e.target.style.backgroundColor = 'transparent';
-                            e.target.style.color = 'var(--color-accent)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.color = 'var(--color-accent)';
                         }}
                     >
                         View Full Menu
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

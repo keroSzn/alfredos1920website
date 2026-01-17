@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
@@ -53,28 +54,10 @@ const Hero = () => {
                     padding: '0 2rem'
                 }}
             >
-                <h2
-                    className="fade-in"
-                    style={{
-                        color: 'var(--color-accent)',
-                        fontSize: '1.2rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '4px',
-                        marginBottom: '1rem'
-                    }}
-                >
+                <h2 className="fade-in hero-subtitle">
                     Authentic Italian Taste
                 </h2>
-                <h1
-                    className="slide-up"
-                    style={{
-                        fontSize: '5rem',
-                        marginBottom: '2rem',
-                        color: '#fff',
-                        textShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                        lineHeight: 1.1
-                    }}
-                >
+                <h1 className="slide-up hero-title">
                     A Taste of Rome <br /> in the Heart of London
                 </h1>
                 <p
@@ -91,25 +74,13 @@ const Hero = () => {
                 >
                     Experience handcrafted pasta, artisanal coffee, and the finest Italian desserts in a modern, elegant setting.
                 </p>
-                <button
-                    className="slide-up"
-                    style={{
-                        padding: '1rem 2.5rem',
-                        backgroundColor: 'var(--color-accent)',
-                        color: 'var(--color-bg-primary)',
-                        fontSize: '1rem',
-                        fontWeight: '600',
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px',
-                        borderRadius: '2px',
-                        transition: 'all 0.3s ease',
-                        animationDelay: '0.4s'
-                    }}
-                    onMouseOver={(e) => e.target.style.backgroundColor = 'var(--color-accent-hover)'}
-                    onMouseOut={(e) => e.target.style.backgroundColor = 'var(--color-accent)'}
+                <Link
+                    to="/menu"
+                    className="slide-up hero-btn"
+                    style={{ textDecoration: 'none', display: 'inline-block' }}
                 >
                     View Menu
-                </button>
+                </Link>
             </div>
         </section>
     );

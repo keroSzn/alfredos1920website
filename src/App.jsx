@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import Hero from './components/Hero';
-import Menu from './components/Menu';
-import About from './components/About';
-import { FaInstagram, FaFacebook, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'; // Assuming react-icons is installing
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import Home from './pages/Home';
+import MenuPage from './pages/MenuPage';
+import './App.css';
+import { FaInstagram, FaPhone, FaMapMarkerAlt, FaBars, FaTimes } from 'react-icons/fa';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,57 +18,66 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
+
+  // Handle Hash Scrolling
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else if (location.pathname === '/') {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
   return (
     <div className="app">
       {/* Navbar */}
-      <nav
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          padding: '1.5rem 2rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          backgroundColor: scrolled ? 'rgba(26, 22, 23, 0.95)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
-          transition: 'all 0.4s ease',
-          borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.1)' : 'none'
-        }}
-      >
-        <a href={import.meta.env.BASE_URL} style={{ textDecoration: 'none', color: 'var(--color-text-primary)', fontSize: '1.5rem', fontFamily: 'var(--font-heading)', fontWeight: '700', letterSpacing: '1px' }}>
-          ALFREDO'S <span style={{ color: 'var(--color-accent)' }}>1920</span>
-        </a>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <Link to="/" className="logo-link">
+          ALFREDO'S <span className="logo-accent">1920</span>
+        </Link>
 
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          {['Menu', 'About', 'Reservations', 'Contact'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              style={{
-                color: 'var(--color-text-primary)',
-                fontSize: '0.9rem',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                fontWeight: '500'
-              }}
-              className="nav-link"
-            >
-              {item}
-            </a>
-          ))}
+        {/* Desktop Menu */}
+        <div className="nav-links-container">
+          <Link to="/menu" className="nav-link">Menu</Link>
+          <Link to="/#about" className="nav-link">About</Link>
+          <Link to="/#reservations" className="nav-link">Reservations</Link>
+          <Link to="/#contact" className="nav-link">Contact</Link>
+        </div>
+
+        {/* Mobile Toggle */}
+        <div className="mobile-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </div>
       </nav>
 
-      <Hero />
-      <About />
-      <Menu />
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu-overlay ${mobileMenuOpen ? 'active' : ''}`}>
+        <Link to="/menu" className="mobile-nav-link">Menu</Link>
+        <Link to="/#about" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>About</Link>
+        <Link to="/#reservations" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Reservations</Link>
+        <Link to="/#contact" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+      </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<MenuPage />} />
+      </Routes>
 
       {/* Footer */}
       <footer id="contact" style={{ padding: '4rem 2rem', backgroundColor: 'var(--color-bg-secondary)', textAlign: 'center' }}>
         <h2 style={{ color: 'var(--color-accent)', marginBottom: '2rem' }}>Visit Us</h2>
+
+        {/* Reservation Info (Adding hidden helper for link) */}
+        <div id="reservations" style={{ marginBottom: '2rem' }}></div>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', marginBottom: '3rem' }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', color: 'var(--color-text-secondary)', flexWrap: 'wrap' }}>
